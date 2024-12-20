@@ -4,10 +4,27 @@ cargo build --release
 
 cd shared_lib 
 cargo build --release
-cargo run -p uniffi-bindgen -- generate --library ../target/debug/libsharedlib.dylib --language python --out-dir out
+```
 
+To generate python bindings:
+```
+cargo run -p uniffi-bindgen -- generate --library ../target/debug/libsharedlib.dylib --language python --out-dir out
+```
+
+To generate typescript bindings:
+```
 cd shared_lib_web
 wasm-pack build --target nodejs
+```
+
+In the python:
+Copy the generated `.dylib` and `.py` files from the `out` directory.
+import the generated python code
+```
+import sdk
+
+print(sdk.add(10, 1))
+print(sdk.create_ed25519())
 ```
 
 In the typescript:
